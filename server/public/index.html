@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,30 @@
     <script src="scripts/client.js"></script>
     <link rel="stylesheet" href="styles/style.css" />
 </head>
+
 <body>
-    <h1>To-Do List</h1>
+    <header>
+        <h1>To-Do List</h1>
+    </header>
+
+    <section id="addTask">
+        <h2>Add Task</h2>
+        <input type="text" id="user-task-entry" value="" placeholder="Enter Task">
+        <button type="button" id="addButton">Add Task</button>
+    </section>
+    <section>
+        <h2>Tasks to Complete</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Complete</th>
+                </tr>
+            </thead>
+            <tbody id="viewTasks">
+            </tbody>
+        </table>
+    </section>
 </body>
+
 </html>
