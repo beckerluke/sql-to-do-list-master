@@ -116,7 +116,7 @@ function renderList(listOfTasks) {
     if (task.completed == 'N') {
         $tr.append(`<td><button class="js-btn-complete" data-id="${task.id}">Complete</button></td>`)
       }else{
-        $tr.append(`<td>√</td>`);
+        $tr.toggleClass('addGreen').append(`<td>√</td>`);
       }
     
     // append delete button and tie the specific task id to it with data
