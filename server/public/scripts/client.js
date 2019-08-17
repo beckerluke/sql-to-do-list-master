@@ -24,8 +24,8 @@ function handleTaskSubmit(event) {
 
 function handleComplete(event) {
     console.log('in handleComplete function');
-
-    $(this).parent().parent().toggleClass('addGreen');
+    $(this).hide();
+    $(this).parent().parent().addClass('addGreen');
     
     const buttonDataObject = $(this).data();
     console.log(buttonDataObject);
@@ -35,7 +35,6 @@ function handleComplete(event) {
 }
 
 function handleDelete(event) {
-    $(this).parent().hide();
     const buttonDataObject = $(this).data();
     console.log(buttonDataObject);
     const taskID = buttonDataObject.id;

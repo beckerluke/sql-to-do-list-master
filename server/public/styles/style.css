@@ -1,11 +1,40 @@
 h1 {
     color: blue;
+    font-family: Chalkduster, fantasy;
+    border-bottom: black dotted 10px;
+    text-align: center;
 }
 
+body {
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
 .addGreen {
     background-color: green;
 }
 
-td {
+td,
+th {
     text-align: center;
+}
+
+h2 {
+    font-family: Marker Felt, fantasy;
+}
+
+#viewTasks {
+    text-align: center;
+}
+
+
+#underline {
+    border-radius: 10px blue solid;
+}
+
+body {
+    background-color: tan;
 }
