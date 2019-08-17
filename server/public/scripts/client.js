@@ -7,6 +7,8 @@ $(document).ready(() => {
 
 function setupClickListeners() {
     $('#js-btn-add').on('click', handleTaskSubmit);
+    // $('#viewKoalas').on('click', '.js-btn-delete', handleDelete);
+    $('#viewKoalas').on('click', '.js-btn-complete', handleComplete);
 }
 
 function handleTaskSubmit(event) {
@@ -48,6 +50,10 @@ function postTask(taskToSend) {
     });
 }
 
+function handleComplete(event) {
+
+}
+
 function renderList(listOfTasks) {
     $('#viewTasks').empty();
 
@@ -55,12 +61,22 @@ function renderList(listOfTasks) {
     let task = listOfTasks[i];
 
     // for each task append a new row in the table
-    $('#viewTasks').append(`
-        <tr>
-            <td>${task.task}</td>
-            <td>${task.completed}</td>
-        </tr>
-    `)
+    let $tr = $('<tr></tr>');
+    console.log(task.task);
+    
+    // $tr.data('task', task);
+    $tr.append(`<td>${task.task}</td>`);
+    $tr.append(`<td>${task.completed}</td>`);
 
+    // append complete button if task completed is 'N' and tie data of the id to it
+    if (task.completed == 'N') {
+        $tr.append(`<td><button class="js-btn-complete" data-id="${task.id}">Complete</button></td>`)
+      }else{
+        $tr.append(`<td>  </td>`);
+      }
+    
+    // append delete button and tie the specific task id to it with data
+    $tr.append(`<button class="js-btn-delete btn" data-id="${task.id}">Delete</button></td>`);
+    $('#viewTasks').append($tr);
     }
 }
