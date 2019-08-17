@@ -18,9 +18,6 @@ taskRouter.get('/', (req,res) => {
         });
 });
 
-
-
-
 //POST route
 taskRouter.post('/', (req,res) => {
     let newTask = req.body;
@@ -33,6 +30,22 @@ taskRouter.post('/', (req,res) => {
         })
         .catch((err) => {
             console.log('error in posting', err);
+            
+            res.sendStatus(500);
+        });
+});
+
+// PUT route
+taskRouter.put('/:id', (req,res) => {
+    let taskID = req.params.id;
+    console.log(taskID);
+    const queryText = `UPDATE "tasks" SET "completed"='Y' WHERE id=$1;`;
+    pool.query(queryText, [taskID])
+        .then((result) => {
+            res.sendStatus(201);
+        })
+        .catch((err) => {
+            console.log('error updating database: ', err);
             
             res.sendStatus(500);
         });

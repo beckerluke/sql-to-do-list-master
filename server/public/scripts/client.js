@@ -52,12 +52,27 @@ function postTask(taskToSend) {
 
 function handleComplete(event) {
     console.log('in handleComplete function');
+
+    $(this).parent().parent().toggleClass('addGreen');
     
     const taskChosenToComplete = $(this).data();
     console.log(taskChosenToComplete);
     const taskID = taskChosenToComplete.id;
     
-    // transfer(taskID);
+    completeTask(taskID);
+}
+
+function completeTask(taskID) {
+    $.ajax({
+        type: 'PUT',
+        url: `tasks/${taskID}`
+    }).then((response) => {
+        console.log('response from server', response);
+        // getTasks();
+    }).catch((error) => {
+        console.log('error in PUT', error);
+        alert('Unable to update list');
+    });
 }
 
 function renderList(listOfTasks) {
