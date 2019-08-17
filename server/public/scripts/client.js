@@ -2,6 +2,7 @@ console.log('in client');
 
 $(document).ready(() => {
     setupClickListeners();
+    getTasks();
 });
 
 function setupClickListeners() {
@@ -26,7 +27,7 @@ function getTasks() {
     }).then((response) => {
         // receiving list of tasks from database
         console.log(response);
-        // renderList(response);  
+        renderList(response);  
     }).catch((error) => {
         console.log('error in GET', error);
     });
@@ -45,4 +46,21 @@ function postTask(taskToSend) {
         console.log('Error in POST', error);
         alert('Unable to add task');
     });
+}
+
+function renderList(listOfTasks) {
+    $('#viewTasks').empty();
+
+    for (let i = 0; i < listOfTasks.length; i += 1) {
+    let task = listOfTasks[i];
+
+    // for each task append a new row in the table
+    $('#viewTasks').append(`
+        <tr>
+            <td>${task.task}</td>
+            <td>${task.completed}</td>
+        </tr>
+    `)
+
+    }
 }
