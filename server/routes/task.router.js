@@ -42,10 +42,27 @@ taskRouter.put('/:id', (req,res) => {
     const queryText = `UPDATE "tasks" SET "completed"='Y' WHERE id=$1;`;
     pool.query(queryText, [taskID])
         .then((result) => {
-            res.sendStatus(201);
+            res.sendStatus(200);
         })
         .catch((err) => {
             console.log('error updating database: ', err);
+            
+            res.sendStatus(500);
+        });
+});
+
+// DELETE route
+taskRouter.delete('/:id', (req,res) => {
+    let taskID = req.params.id
+    console.log(taskID);
+    const queryText = `DELETE FROM "tasks" WHERE id=$1;`;
+    
+    pool.query(queryText, [taskID])
+        .then((result) => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error deleting from db: ', err);
             
             res.sendStatus(500);
         });

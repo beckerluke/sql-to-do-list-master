@@ -7,7 +7,7 @@ $(document).ready(() => {
 
 function setupClickListeners() {
     $('#js-btn-add').on('click', handleTaskSubmit);
-    // $('#viewKoalas').on('click', '.js-btn-delete', handleDelete);
+    $('#viewTasks').on('click', '.js-btn-delete', handleDelete);
     $('#viewTasks').on('click', '.js-btn-complete', handleComplete);
 }
 
@@ -22,6 +22,28 @@ function handleTaskSubmit(event) {
     $('#user-task-entry').val(''); // clear user input fields
 }
 
+function handleComplete(event) {
+    console.log('in handleComplete function');
+
+    $(this).parent().parent().toggleClass('addGreen');
+    
+    const buttonDataObject = $(this).data();
+    console.log(buttonDataObject);
+    const taskID = buttonDataObject.id;
+    
+    completeTask(taskID);
+}
+
+function handleDelete(event) {
+    $(this).parent().hide();
+    const buttonDataObject = $(this).data();
+    console.log(buttonDataObject);
+    const taskID = buttonDataObject.id;
+
+    deleteTask(taskID);
+}
+
+// for GET request
 function getTasks() {
     $.ajax({
         type: 'GET',
@@ -50,18 +72,7 @@ function postTask(taskToSend) {
     });
 }
 
-function handleComplete(event) {
-    console.log('in handleComplete function');
-
-    $(this).parent().parent().toggleClass('addGreen');
-    
-    const taskChosenToComplete = $(this).data();
-    console.log(taskChosenToComplete);
-    const taskID = taskChosenToComplete.id;
-    
-    completeTask(taskID);
-}
-
+// PUT request
 function completeTask(taskID) {
     $.ajax({
         type: 'PUT',
@@ -72,6 +83,19 @@ function completeTask(taskID) {
     }).catch((error) => {
         console.log('error in PUT', error);
         alert('Unable to update list');
+    });
+}
+
+function deleteTask(taskID) {
+    $.ajax({
+        type: 'DELETE',
+        url: `/tasks/${taskID}`
+    }).then((response) => {
+        console.log('response from server: ', response);
+        getTasks();
+    }).catch((error) => {
+        console.log('error in DELETE', error);
+        alert('Not able to delete task');
     });
 }
 
@@ -93,11 +117,11 @@ function renderList(listOfTasks) {
     if (task.completed == 'N') {
         $tr.append(`<td><button class="js-btn-complete" data-id="${task.id}">Complete</button></td>`)
       }else{
-        $tr.append(`<td>  </td>`);
+        $tr.append(`<td>√</td>`);
       }
     
     // append delete button and tie the specific task id to it with data
-    $tr.append(`<button class="js-btn-delete btn" data-id="${task.id}">Delete</button></td>`);
+    $tr.append(`<button class="js-btn-delete" data-id="${task.id}">Delete</button></td>`);
     $('#viewTasks').append($tr);
     }
 }

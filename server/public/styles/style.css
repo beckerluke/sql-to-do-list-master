@@ -5,3 +5,7 @@ h1 {
 .addGreen {
     background-color: green;
 }
+
+td {
+    text-align: center;
+}
