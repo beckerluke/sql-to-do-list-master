@@ -8,7 +8,7 @@ $(document).ready(() => {
 function setupClickListeners() {
     $('#js-btn-add').on('click', handleTaskSubmit);
     // $('#viewKoalas').on('click', '.js-btn-delete', handleDelete);
-    $('#viewKoalas').on('click', '.js-btn-complete', handleComplete);
+    $('#viewTasks').on('click', '.js-btn-complete', handleComplete);
 }
 
 function handleTaskSubmit(event) {
@@ -51,7 +51,13 @@ function postTask(taskToSend) {
 }
 
 function handleComplete(event) {
-
+    console.log('in handleComplete function');
+    
+    const taskChosenToComplete = $(this).data();
+    console.log(taskChosenToComplete);
+    const taskID = taskChosenToComplete.id;
+    
+    // transfer(taskID);
 }
 
 function renderList(listOfTasks) {
