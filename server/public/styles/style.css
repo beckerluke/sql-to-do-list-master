@@ -5,6 +5,10 @@ h1 {
     text-align: center;
 }
 
+section {
+    padding-top: 20px;
+}
+
 body {
     text-align: center;
 }

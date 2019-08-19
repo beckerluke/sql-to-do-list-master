@@ -114,13 +114,13 @@ function renderList(listOfTasks) {
 
     // append complete button if task completed is 'N' and tie data of the id to it
     if (task.completed == 'N') {
-        $tr.append(`<td><button class="js-btn-complete" data-id="${task.id}">Complete</button></td>`)
+        $tr.append(`<td><button class="btn btn-success js-btn-complete" data-id="${task.id}">Complete</button></td>`)
       }else{
         $tr.toggleClass('addGreen').append(`<td>√</td>`);
       }
     
     // append delete button and tie the specific task id to it with data
-    $tr.append(`<button class="js-btn-delete" data-id="${task.id}">Delete</button></td>`);
+    $tr.append(`<button class="btn btn-danger js-btn-delete" data-id="${task.id}">Delete</button></td>`);
     $('#viewTasks').append($tr);
     }
 }
