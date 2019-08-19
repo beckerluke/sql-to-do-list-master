@@ -31,9 +31,6 @@ if (process.env.DATABASE_URL) {
 
 const pool = new POOL(config); 
 
-
-
-
 pool.on('connect', () => {
     console.log('Pool is connected');
 });
